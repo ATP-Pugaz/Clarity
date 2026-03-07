@@ -1,0 +1,187 @@
+/* Navigation Bar Styles */
+
+.nav-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
+    background: linear-gradient(180deg, #0d0d0d 0%, #000000 100%);
+    border-top: 1px solid rgba(0, 188, 212, 0.2);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 10px;
+    z-index: 1000;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5), 0 -1px 10px rgba(0, 188, 212, 0.1);
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ripple effect container */
+.nav-item::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(0, 188, 212, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.nav-item:active::before {
+    width: 120px;
+    height: 120px;
+}
+
+/* Icon wrapper */
+.nav-icon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-normal);
+}
+
+.nav-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 1.8;
+    transition: all var(--transition-normal);
+}
+
+/* Icon label */
+.nav-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: all var(--transition-normal);
+}
+
+/* Inactive state */
+.nav-item:not(.active) .nav-icon svg {
+    color: #666666;
+    opacity: 0.6;
+    filter: drop-shadow(0 0 0 transparent);
+}
+
+.nav-item:not(.active) .nav-label {
+    color: #666666;
+    opacity: 0.6;
+}
+
+/* Hover state */
+.nav-item:not(.active):hover .nav-icon svg {
+    color: var(--sky-blue);
+    opacity: 0.9;
+    filter: drop-shadow(0 0 8px rgba(0, 188, 212, 0.5));
+    transform: scale(1.1);
+}
+
+.nav-item:not(.active):hover .nav-label {
+    color: var(--sky-blue);
+    opacity: 0.9;
+}
+
+.nav-item:not(.active):hover {
+    background: rgba(0, 188, 212, 0.05);
+}
+
+/* Active state */
+.nav-item.active {
+    background: rgba(0, 188, 212, 0.1);
+}
+
+.nav-item.active .nav-icon svg {
+    color: var(--bright-blue);
+    opacity: 1;
+    filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.8));
+    animation: icon-pulse 2s ease-in-out infinite;
+}
+
+.nav-item.active .nav-label {
+    color: var(--bright-blue);
+    opacity: 1;
+    text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+}
+
+/* Active indicator dot */
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--bright-blue);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--bright-blue);
+}
+
+/* Badge for notifications */
+.nav-badge {
+    position: absolute;
+    top: 4px;
+    right: 10px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+    background: var(--danger);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 8px rgba(255, 82, 82, 0.5);
+}
+
+/* Settings icon rotation on active */
+.nav-item.active .settings-icon svg {
+    animation: icon-pulse 2s ease-in-out infinite, rotate-slight 4s ease-in-out infinite;
+}
+
+@keyframes rotate-slight {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(10deg);
+    }
+
+    75% {
+        transform: rotate(-10deg);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 380px) {
+    .nav-item {
+        padding: 8px 10px;
+    }
+
+    .nav-label {
+        font-size: 10px;
+    }
+}
