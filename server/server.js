@@ -9,6 +9,9 @@ app.listen(PORT, () => {
   console.log("Server running on port " + PORT);
 });
 
+app.get("/", (req, res) => {
+  res.send("Backend is working 🚀");
+});
 
 app.listen(PORT, () => {
     console.log(`
