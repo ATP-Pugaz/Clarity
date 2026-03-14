@@ -9,7 +9,7 @@ const app = express();
 // During development, you can use app.use(cors()); 
 // For production, use your specific Vercel URL:
 app.use(cors({
-    origin: ["https://your-vercel-app-url.vercel.app", "http://localhost:5173"], 
+    origin: "https://clarity-wealth-builder.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
