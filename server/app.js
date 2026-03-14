@@ -5,19 +5,33 @@ const categoryRoutes = require('./routes/categoryRoutes');
 
 const app = express();
 
-// Middlewares
-app.use(cors());
+// 1. CORS Configuration
+// During development, you can use app.use(cors()); 
+// For production, use your specific Vercel URL:
+app.use(cors({
+    origin: ["https://your-vercel-app-url.vercel.app", "http://localhost:5173"], 
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}));
+
+// 2. Body Parsers (Required for Excel imports/JSON data)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
+// 3. Health Check Route (Helps Render monitor your app)
+app.get("/", (req, res) => {
+    res.send("Money Manager API is running... 🚀");
+});
+
+// 4. Routes
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/categories', categoryRoutes);
 
-// Basic error handler
+// 5. Error Handling Middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(err.status || 500).json({
+        success: false,
         error: err.message || 'Internal Server Error'
     });
 });
