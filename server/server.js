@@ -1,22 +1,13 @@
-// 🚀 BACKEND RUN: node server.js
-// 🚀 SCALE (PM2 Background): npm i -g pm2; pm2 start server.js --name "moneymanager-api"
-// 🚀 DOCKER (Container): docker build -t moneymanager-api .
 const app = require('./app');
 
+// Render automatically assigns a PORT, so process.env.PORT is critical
 const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
-});
-
-app.get("/", (req, res) => {
-  res.send("Backend is working 🚀");
-});
 
 app.listen(PORT, () => {
     console.log(`
 🚀 Money Manager Backend is running!
-📍 URL: http://localhost:${PORT}
+📍 Port: ${PORT}
+✅ Health Check: GET /
 ✅ Import: POST /api/transactions/import
 ✅ Export: GET /api/transactions/export?format=excel|pdf
     `);
